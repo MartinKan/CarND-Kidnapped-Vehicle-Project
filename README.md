@@ -23,13 +23,13 @@ If the yaw rate is not zero, the following equations would apply:
 
 After the location of each particle has been updated by the prediction step, the update step is then called to update the weight of each particle.  Each particle carries a weight value, which determines how much weight is given to the particle when estimating the location of the vehicle.  The weight value of each particle is updated as follows:
 
-	1.	For each particle, we will first map each observation to the particle's POV and transform its coordinates to map coordinates (recall that the sensors will make observations on the location of nearby landmarks using the vehicle coordinate space, so we need to first map them from the POV of each particle - since each particle represents a possible location of the vehicle - and then map the observations' coordinates from the persective of each particle to the map's coordinate space)
-	2.	Then, we will associate each transformed observation to a landmark using the nearest neighbour approach (we associate the closest landmark to each of the transformed observations).  
-	3.	Next, we will update the weight of each measurement using the multivariate-Gaussian probability density function, which is described below:
+1.	For each particle, we will first map each observation to the particle's POV and transform its coordinates to map coordinates (recall that the sensors will make observations on the location of nearby landmarks using the vehicle coordinate space, so we need to first map them from the POV of each particle - since each particle represents a possible location of the vehicle - and then map the observations' coordinates from the persective of each particle to the map's coordinate space)
+2.	Then, we will associate each transformed observation to a landmark using the nearest neighbour approach (we associate the closest landmark to each of the transformed observations).  
+3.	Next, we will update the weight of each measurement using the multivariate-Gaussian probability density function, which is described below:
 
 ![alt text](https://github.com/MartinKan/CarND-Kidnapped-Vehicle-Project/blob/master/Multivariate-Gaussian.jpg)
 
-	4.	Finally, the weight of the particle is calculated by multiplying the weight of all measurement values (that we derived in step 3) together.
+4.	Finally, the weight of the particle is calculated by multiplying the weight of all measurement values (that we derived in step 3) together.
 
 Integral to the particle filter is the resampling step, which is called after the weight of all of the particles have been updated.  This resampling step will repopulate the particle list in accordance with the probability of each particle's weight - so more important particles will appear more relevant and less important particles will appear less relevant in the new particle list.
 
